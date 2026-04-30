@@ -103,4 +103,15 @@ export class Admission {
       })
     }
   }
+
+  onImageSelect(event:Event){
+    const file=(event.target as HTMLInputElement).files?.[0];
+    if(file){
+      const reader=new FileReader();
+      reader.onload = () =>{
+        this.admissionForm.get('document.studentPhoto')?.setValue(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }
