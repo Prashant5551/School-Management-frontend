@@ -91,6 +91,7 @@ export class Admission {
     console.log(this.admissionForm.value);
     const content = document.getElementById('pdf');
     if (content) {
+      content.style.display = 'block';
       html2canvas(content).then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4');
@@ -100,15 +101,16 @@ export class Admission {
 
         pdf.addImage(imgData, 'PNG', 0, 0, pdfwidth, pdfHeight);
         pdf.save('admission-form.pdf');
-      })
+      });
+      content.style.display = 'none';
     }
   }
 
-  onImageSelect(event:Event){
-    const file=(event.target as HTMLInputElement).files?.[0];
-    if(file){
-      const reader=new FileReader();
-      reader.onload = () =>{
+  onImageSelect(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
         this.admissionForm.get('document.studentPhoto')?.setValue(reader.result);
       };
       reader.readAsDataURL(file);

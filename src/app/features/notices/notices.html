@@ -19,34 +19,17 @@
       </tr>
     </thead>
     <tbody>
+      @for (item of notices; track $index) {
       <tr>
-        <td>1</td>
-        <td>General</td>
-        <td>2025-03-01</td>
-        <td>School will be closed for summer break.</td>
+        <td>{{$index}}</td>
+        <td>{{item.category}}</td>
+        <td>{{item.date | date}}</td>
+        <td>{{item.title}}</td>
         <td class="text-end text-decoration-underline cursor-pointer">
-          <a data-bs-toggle="modal" data-bs-target="#myModal"> Read More </a>
+          <a data-bs-toggle="modal" data-bs-target="#myModal" (click)="showNotice(item)"> Read More </a>
         </td>
       </tr>
-
-      <tr>
-        <td>2</td>
-        <td>Event</td>
-        <td>2025-03-15</td>
-        <td>Annual Sports Day will be held on March 15.</td>
-        <td class="text-end text-decoration-underline cursor-pointer">
-          <a data-bs-toggle="modal" data-bs-target="#myModal"> Read More </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>General</td>
-        <td>2025-03-20</td>
-        <td>Parent-Teacher Meeting scheduled for March 20.</td>
-        <td class="text-end text-decoration-underline cursor-pointer">
-          <a data-bs-toggle="modal" data-bs-target="#myModal"> Read More </a>
-        </td>
-      </tr>
+      }
     </tbody>
   </table>
 </div>
@@ -57,16 +40,21 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
+        <h4 class="modal-title">{{selectedNotice.title}}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">Modal body..</div>
+      <div class="modal-body">
+        <p style="font-size: 10px;" class="text-end text-muted">
+          <span>Date: {{selectedNotice.date | date}}</span>
+          <span> Event Type: {{selectedNotice.category}}</span>
+        </p>
+        <p><strong>Notice Details</strong>
+          <br />
+          {{selectedNotice.description}}
+        </p>
+      </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
