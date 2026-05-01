@@ -24,4 +24,9 @@ export class Api {
     return this.http.get(`http://localhost:3000/api/gallery`);
   }
 
+  getTeachers() {
+    // return this.http.get(`${environment.apiUrl}/gallery`);
+    return this.http.get(`http://localhost:3000/api/teacher`);
+  }
+
 }
