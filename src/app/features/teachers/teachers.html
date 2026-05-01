@@ -6,11 +6,7 @@
     @for (item of teachers; track $index) {
     <div class="col-md-4 mb-4">
       <div class="card h-100">
-        <img
-          [src]="item.image"
-          class="card-img-top"
-          alt="Teacher 1"
-        />
+        <img [src]="item.image" class="card-img-top" alt="Teacher 1" />
         <div class="card-body">
           <h5 class="card-title"><strong>Name:</strong> {{item.name}}</h5>
           <p class="card-text"><strong>Subject:</strong> {{item.subject}}</p>
@@ -21,6 +17,6 @@
         </div>
       </div>
     </div>
-  }
+    }
   </div>
 </div>

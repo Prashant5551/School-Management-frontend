@@ -8,10 +8,10 @@
           <h4 class="mb-0"><i class="fa fa-envelope me-2"></i>Contact Us</h4>
         </div>
         <div class="card-body p-4">
-          <form>
+          <form [formGroup]="contactForm">
             <div class="mb-3">
               <label for="name" class="form-label"
-                ><i class="fa fa-user me-1"></i>Name</label
+                ><i class="fa fa-user me-1"></i>Name <span class="danger">*</span></label
               >
               <input
                 type="text"
@@ -24,7 +24,7 @@
             </div>
             <div class="mb-3">
               <label for="email" class="form-label"
-                ><i class="fa fa-envelope me-1"></i>Email</label
+                ><i class="fa fa-envelope me-1"></i>Email<span class="danger">*</span></label
               >
               <input
                 type="email"
@@ -37,7 +37,7 @@
             </div>
             <div class="mb-3">
               <label for="phone" class="form-label"
-                ><i class="fa fa-phone me-1"></i>Phone</label
+                ><i class="fa fa-phone me-1"></i>Phone<span class="danger">*</span></label
               >
               <input
                 type="tel"
@@ -50,7 +50,7 @@
             </div>
             <div class="mb-3">
               <label for="subject" class="form-label"
-                ><i class="fa fa-book me-1"></i>Subject</label
+                ><i class="fa fa-book me-1"></i>Subject<span class="danger">*</span></label
               >
               <input
                 type="text"
@@ -63,7 +63,7 @@
             </div>
             <div class="mb-3">
               <label for="message" class="form-label"
-                ><i class="fa fa-comment me-1"></i>Message</label
+                ><i class="fa fa-comment me-1"></i>Message<span class="danger">*</span></label
               >
               <textarea
                 class="form-control"
