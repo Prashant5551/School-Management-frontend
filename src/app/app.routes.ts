@@ -11,6 +11,7 @@ import { Disclaimer } from './pages/disclaimer/disclaimer';
 import { Dashboard } from './dashboard/dashboard';
 import { Login } from './login/login';
 import { Admission } from './features/admission/admission';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -23,7 +24,7 @@ export const routes: Routes = [
     { path: 'about-us', component: About },
     { path: 'privacy-policy', component: PrivacyPolicy },
     { path: 'disclaimer', component: Disclaimer },
-    { path: 'dashboard', component: Dashboard },
+    { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
     { path: 'login', component: Login },
     { path: '**', redirectTo: '/home' },
 
