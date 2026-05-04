@@ -25,8 +25,13 @@ export class Api {
   }
 
   getTeachers() {
-    // return this.http.get(`${environment.apiUrl}/gallery`);
+    // return this.http.get(`${environment.apiUrl}/teacher`);
     return this.http.get(`http://localhost:3000/api/teacher`);
+  }
+
+  submitForm(formData: any) {
+    // return this.http.post(`${environment.apiUrl}/contact`, formData);
+    return this.http.post(`http://localhost:3000/api/contact`, formData);
   }
 
 }

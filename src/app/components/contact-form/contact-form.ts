@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Api } from '../../services/api';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contact-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './contact-form.html',
   styleUrl: './contact-form.scss'
 })
@@ -17,18 +18,23 @@ export class ContactForm {
       phone: ['', Validators.required],
       subject: ['', Validators.required],
       message: ['', Validators.required],
-    })
+    });
   }
 
   ngOnInit() {
     this.getContact();
   }
 
+  onSubmit() {
+    console.log(this.contactForm.value, 'pk');
+  }
+
   getContact() {
-    this.apiService.getTeachers().subscribe({
+    this.apiService.submitForm(this.contactForm.value).subscribe({
       next: (response: any) => {
         if (response && response['status'] === 'Y') {
-          // this.teachers = response.data;
+          alert(response.message);
+          this.contactForm.reset();
         }
         // console.log(this.teachers);
       },
