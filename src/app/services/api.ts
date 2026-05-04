@@ -24,6 +24,16 @@ export class Api {
     return this.http.get(`http://localhost:3000/api/gallery`);
   }
 
+  getContacts() {
+    // return this.http.get(`${environment.apiUrl}/contact`);
+    return this.http.get(`http://localhost:3000/api/contact`);
+  }
+
+  deleteContact(id: string) {
+    // return this.http.delete(`${environment.apiUrl}/contact`);
+    return this.http.delete(`http://localhost:3000/api/contact/${id}`);
+  }
+
   getTeachers() {
     // return this.http.get(`${environment.apiUrl}/teacher`);
     return this.http.get(`http://localhost:3000/api/teacher`);
