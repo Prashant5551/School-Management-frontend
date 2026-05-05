@@ -1,11 +1,6 @@
 <div class="d-flex justify-content-end mb-3">
-  <a
-    href="#"
-    class="btn bg-primary btn-sm background text-white"
-    data-bs-toggle="modal"
-    data-bs-target="#myModal"
-  >
-    <i class="fa fa-plus"></i> Add Gallery Event
+  <a href="#" class="btn bg-primary btn-sm background text-white" data-bs-toggle="modal" data-bs-target="#myModal">
+    <i class="fa fa-plus" (click)="isEdit = false; selectedGallery.reset()"></i> Add Gallery Event
   </a>
 </div>
 <table class="table">
@@ -18,22 +13,21 @@
     </tr>
   </thead>
   <tbody>
+    @for (gallery of galleries; track $index) {
     <tr>
-      <td>Event 1</td>
-      <td>2023-10-01</td>
+      <td>{{gallery.title}}</td>
+      <td>{{gallery.date | date}}</td>      
       <td>
-        <img src="photo1.jpg" alt="Event 1" class="img-thumbnail" />
-        <img src="photo2.jpg" alt="Event 1" class="img-thumbnail" />
+        @for (image of gallery.images; track $index) {
+        <img [src]="sanitizeUrl(image)" alt="Event 1" width="80" height="50" class="img-thumbnail" />
+        }
       </td>
       <td class="text-end">
-        <i
-          class="fa fa-pencil me-4"
-          data-bs-toggle="modal"
-          data-bs-target="#myModal"
-        ></i>
-        <i class="fa fa-trash text-danger"></i>
+        <i class="fa fa-pencil me-4" (click)="edit(gallery)" data-bs-toggle="modal" data-bs-target="#myModal"></i>
+        <i class="fa fa-trash text-danger" (click)="delete(gallery)"></i>
       </td>
     </tr>
+    }
   </tbody>
 </table>
 
@@ -44,60 +38,36 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title text text-center">Add/Edit Gallery Event</h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>
+        <form [formGroup]="selectedGallery">
           <div class="row">
             <!-- Part 1: Event Details -->
             <div class="col-md-12">
               <div class="mb-3">
                 <label for="eventTitle" class="form-label">Event Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="eventTitle"
-                  placeholder="Enter event title"
-                />
+                <input formControlName="title" type="text" class="form-control" id="eventTitle" placeholder="Enter event title" />
               </div>
               <div class="mb-3">
                 <label for="eventDate" class="form-label">Event Date</label>
-                <input type="date" class="form-control" id="eventDate" />
+                <input type="date" formControlName="date" class="form-control" id="eventDate" />
               </div>
               <div class="mb-3">
-                <label for="location" class="form-label"
-                  >Image URLs (comma-separated)</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="images"
-                  placeholder="Enter image URLs"
-                />
+                <label for="location" class="form-label">Image URLs (comma-separated)</label>
+                <input type="text" formControlName="imagesUrl" class="form-control" id="images" placeholder="Enter image URLs" />
               </div>
             </div>
           </div>
         </form>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-danger background btn-sm"
-            data-bs-dismiss="modal"
-          >
+          <button [disabled]="selectedGallery.invalid" (click)="onSubmit()" type="button" class="btn btn-danger background btn-sm" data-bs-dismiss="modal">
             Submit
           </button>
-          <button
-            type="button"
-            class="btn btn-danger btn-sm"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
             Close
           </button>
         </div>

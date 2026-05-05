@@ -44,4 +44,19 @@ export class Api {
     return this.http.post(`http://localhost:3000/api/contact`, formData);
   }
 
+  addGallery(formData: any) {
+    // return this.http.post(`${environment.apiUrl}/gallery`, formData);
+    return this.http.post(`http://localhost:3000/api/gallery`, formData);
+  }
+
+  updateGallery(id: string, formData: any) {
+    // return this.http.put(`${environment.apiUrl}/gallery`, formData);
+    return this.http.put(`http://localhost:3000/api/gallery/${id}`, formData);
+  }
+
+  deleteGallery(id: string) {
+    // return this.http.delete(`${environment.apiUrl}/gallery`);
+    return this.http.delete(`http://localhost:3000/api/gallery/${id}`);
+  }
+
 }
